@@ -14,7 +14,7 @@
 </p>
 
 <p>
-  <img src="https://img.shields.io/badge/Question_Bank-~300-C6821E?style=flat-square&labelColor=24506B" alt="Question Bank">
+  <img src="https://img.shields.io/badge/Question_Bank-600-C6821E?style=flat-square&labelColor=24506B" alt="Question Bank">
   <img src="https://img.shields.io/badge/Modules-8-336791?style=flat-square&labelColor=24506B" alt="Modules">
   <img src="https://img.shields.io/badge/Projects-8-336791?style=flat-square&labelColor=24506B" alt="Projects count">
   <img src="https://img.shields.io/badge/Primary_Dialect-PostgreSQL-C6821E?style=flat-square&labelColor=24506B" alt="Primary dialect">
@@ -70,8 +70,8 @@ The quiz system includes module quizzes and cumulative mixed quizzes with instan
 
 | Feature | Details |
 | --- | --- |
-| Module coverage | 8 module quizzes |
-| Question pool | Around 300 questions |
+| Module coverage | 8 module quizzes, sized by chapter importance (50/75/100 per module) |
+| Question pool | 600 questions total |
 | Attempt style | Randomized questions and shuffled options |
 | Mixed review | 3 cumulative mixed quizzes |
 | Access | [Open the Quiz Hub](https://ijk37.com/sql/03-quiz/) |

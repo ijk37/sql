@@ -1,4 +1,4 @@
-// ── Module 08 — Advanced SQL (34) ────────────────────────────────────────────
+// ── Module 08 — Advanced SQL (100) ───────────────────────────────────────────
 QUESTIONS["08"] = [
   {
     q: "What does the ALTER TABLE statement allow you to do?",
@@ -890,5 +890,49 @@ QUESTIONS["08"] = [
     ],
     answer: 1,
     explain: "The course wrap-up describes Project 08 as combining a view, a recursive CTE, and window functions into one deliverable — the final proof that these Module 08 pieces fit together.",
+  },
+  {
+    q: "What is the general structure of a WITH RECURSIVE CTE used to walk an employee-management chain?",
+    options: [
+      "A single SELECT with no UNION, filtered by a WHERE clause",
+      "A base case (anchor member) selecting the starting row(s), UNION ALL'd with a recursive member that joins the CTE back to the source table, repeating until no new rows are produced",
+      "A CREATE FUNCTION statement with no SELECT at all",
+      "A plain self join with no CTE required",
+    ],
+    answer: 1,
+    explain: "A recursive CTE always has an anchor (non-recursive) member establishing the starting point, combined with UNION ALL to a recursive member that references the CTE's own name — repeating until the recursive member returns no additional rows.",
+  },
+  {
+    q: "Why is UNION ALL used instead of plain UNION inside a recursive CTE's recursive member?",
+    options: [
+      "UNION is not valid SQL syntax inside a CTE",
+      "UNION ALL avoids the overhead (and potential logic errors) of de-duplicating rows on every recursive step, and recursive CTEs are required to use UNION ALL by the SQL standard",
+      "UNION ALL runs the query only once instead of repeatedly",
+      "There is no difference; either works identically",
+    ],
+    answer: 1,
+    explain: "The SQL standard requires UNION ALL (not UNION) between a recursive CTE's anchor and recursive members — this also avoids the cost of duplicate elimination on every iteration of the recursion.",
+  },
+  {
+    q: "What does a NOT EXISTS anti-join pattern accomplish that a plain LEFT JOIN alone does not directly show?",
+    options: [
+      "It returns matched rows only, like an inner join",
+      "It directly expresses 'rows in the left table with no corresponding row in the right table' as the query's intent, typically paired with a correlated subquery rather than a post-join NULL check",
+      "It is functionally impossible to express the same result with a LEFT JOIN",
+      "NOT EXISTS only works with numeric columns",
+    ],
+    answer: 1,
+    explain: "NOT EXISTS (SELECT 1 FROM right_table WHERE right_table.fk = left_table.pk) reads as 'give me left-table rows where no matching right-table row exists' — logically equivalent to a LEFT JOIN ... WHERE right.col IS NULL anti-join pattern, just expressed as a correlated subquery instead of a post-join filter.",
+  },
+  {
+    q: "Which statement about updatable views is accurate?",
+    options: [
+      "Every view, no matter how it's defined, can always be used in INSERT/UPDATE/DELETE statements",
+      "A view is typically updatable only if it maps straightforwardly to a single underlying table without aggregation, DISTINCT, GROUP BY, or set operators obscuring the row-to-row mapping",
+      "Views can never be queried with SELECT, only modified",
+      "Updatable views require a stored procedure to function at all",
+    ],
+    answer: 1,
+    explain: "A view built from a simple SELECT against one table (no aggregation, GROUP BY, DISTINCT, or joins that make the row mapping ambiguous) is generally updatable; views involving aggregation or multiple joined tables usually are not, or need special rules (like INSTEAD OF triggers) to become updatable.",
   },
 ];

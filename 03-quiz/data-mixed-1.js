@@ -39,7 +39,7 @@ function buildMixed(specs) {
   return out;
 }
 
-// ── Mixed Review 1 — 40 Qs across Modules 01-04 (Getting Started through Data Modeling) ──
+// ── Mixed Review 1 — 50 Qs across Modules 01-04 (Getting Started through Data Modeling) ──
 QUESTIONS["mixed-1"] = buildMixed([
-  { ids: ["01", "02", "03", "04"], count: 40 },
+  { ids: ["01", "02", "03", "04"], count: 50 },
 ]);

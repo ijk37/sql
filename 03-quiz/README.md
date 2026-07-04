@@ -20,20 +20,20 @@ Interactive multiple-choice quizzes for all 8 **SQL & Databases** modules, plus 
 
 ## &#128451;&#65039; Module Quizzes
 
-Each module has a pool of **~30-40 questions**; every attempt shows **20 random** of them.
+Pool size scales with how central each module is to hands-on SQL/data-science work — the heaviest modules (core querying, modeling, and advanced SQL) get the deepest pools. Every attempt shows **25 random** questions from the pool.
 
-| # | Module | Pool |
-|---|--------|------|
-| 01 | Getting Started | ~30-40 |
-| 02 | The Relational Model | ~30-40 |
-| 03 | SQL Fundamentals | ~30-40 |
-| 04 | Data Modeling & E-R Diagrams | ~30-40 |
-| 05 | Database Design & Normalization | ~30-40 |
-| 06 | Database Administration | ~30-40 |
-| 07 | Data Warehousing, BI & Big Data | ~30-40 |
-| 08 | Advanced SQL | ~30-40 |
+| # | Module | Pool | Weight |
+|---|--------|------|--------|
+| 01 | Getting Started | 50 | Light |
+| 02 | The Relational Model | 75 | Core |
+| 03 | SQL Fundamentals | 100 | Heaviest |
+| 04 | Data Modeling & E-R Diagrams | 100 | Heaviest |
+| 05 | Database Design & Normalization | 75 | Core |
+| 06 | Database Administration | 50 | Light |
+| 07 | Data Warehousing, BI & Big Data | 50 | Light |
+| 08 | Advanced SQL | 100 | Heaviest |
 
-**Total: ~300 module questions** (20 drawn per attempt).
+**Total: 600 module questions** (25 drawn per attempt).
 
 ## &#129514; Mixed Reviews
 
@@ -41,9 +41,9 @@ Cumulative checkpoints sampled across a growing range of modules, so weak spots 
 
 | Quiz | Coverage | Questions per attempt |
 |------|----------|-----------------------|
-| Mixed Review 1 | Modules 01-04 | 40 |
-| Mixed Review 2 | Modules 01-06 | 50 |
-| Final Mixed Review | Modules 01-08 | 60 |
+| Mixed Review 1 | Modules 01-04 | 50 |
+| Mixed Review 2 | Modules 01-06 | 65 |
+| Final Mixed Review | Modules 01-08 | 80 |
 
 ## &#9989; How It Works
 

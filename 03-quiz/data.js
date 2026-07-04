@@ -24,11 +24,11 @@ const TOPICS = [
 // pool (re-picked on every retry). If a pool is smaller than the configured
 // size, the whole pool is used. Override per attempt with a ?n= URL parameter.
 const QUIZ_CONFIG = {
-  defaultAttempt: 20,        // random questions per attempt for module quizzes
+  defaultAttempt: 25,        // random questions per attempt for module quizzes
   attempt: {                 // per-topic overrides (mixed quizzes stay large)
-    "mixed-1": 40,
-    "mixed-2": 50,
-    "mixed-3": 60,
+    "mixed-1": 50,
+    "mixed-2": 65,
+    "mixed-3": 80,
   },
 };
 
