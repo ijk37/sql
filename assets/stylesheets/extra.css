@@ -1,0 +1,154 @@
+/* ── SQL & Databases · Postgres blue & MySQL amber theme ─────────────────── */
+
+:root {
+  --sql-blue: #336791;
+  --sql-blue-dark: #24506b;
+  --sql-blue-bright: #4a8fc2;
+  --sql-amber: #e2a33d;
+  --sql-amber-deep: #c6821e;
+  --sql-ink: #16232c;
+  --sql-border: rgba(22, 35, 44, 0.14);
+
+  /* Drive Material's primary (header/nav/footer) and accent (links/hover) */
+  --md-primary-fg-color: #336791;
+  --md-primary-fg-color--light: #4a8fc2;
+  --md-primary-fg-color--dark: #24506b;
+  --md-accent-fg-color: #c6821e;
+}
+
+[data-md-color-scheme="slate"] {
+  --sql-border: rgba(255, 255, 255, 0.16);
+  --md-primary-fg-color: #336791;
+  --md-primary-fg-color--light: #4a8fc2;
+  --md-primary-fg-color--dark: #24506b;
+  --md-accent-fg-color: #e2a33d; /* brighter amber reads better on dark */
+  --md-typeset-a-color: #e2a33d;
+}
+
+.md-header,
+.md-tabs {
+  box-shadow: none;
+}
+
+/* amber hairline under the header/tabs for the two-tone look */
+.md-tabs {
+  border-bottom: 3px solid var(--sql-amber);
+}
+
+.md-header__title {
+  font-weight: 700;
+}
+
+.md-typeset h1,
+.md-typeset h2 {
+  font-weight: 750;
+  letter-spacing: 0;
+}
+
+.md-typeset h1 {
+  margin-bottom: 0.9rem;
+  color: var(--sql-blue);
+}
+
+[data-md-color-scheme="slate"] .md-typeset h1 {
+  color: var(--sql-amber);
+}
+
+.md-typeset h2 {
+  border-bottom: 2px solid var(--sql-amber);
+  padding-bottom: 0.35rem;
+}
+
+.md-typeset table:not([class]) {
+  border: 1px solid var(--sql-border);
+  border-radius: 0.4rem;
+  overflow: hidden;
+}
+
+.md-typeset table:not([class]) th {
+  background: var(--sql-blue);
+  color: #fff;
+  font-weight: 700;
+}
+
+.md-typeset code {
+  border-radius: 0.25rem;
+}
+
+.md-typeset .admonition,
+.md-typeset details {
+  border-radius: 0.45rem;
+}
+
+/* colored left rule on blockquotes for a little warmth */
+.md-typeset blockquote {
+  border-left: 0.2rem solid var(--sql-amber);
+}
+
+/* ── Home hero cards ──────────────────────────────────────────────────── */
+.sql-hero-grid {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  margin: 1.5rem 0 2rem;
+}
+
+.md-typeset .sql-card {
+  align-items: center;
+  border: 1px solid var(--sql-border);
+  border-left: 0.35rem solid var(--sql-blue);
+  border-radius: 0.5rem;
+  color: var(--md-default-fg-color);
+  display: flex;
+  font-size: 1.05rem;
+  font-weight: 700;
+  gap: 0.55rem;
+  min-height: 5rem;
+  padding: 1rem;
+  text-decoration: none;
+  transition: border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+}
+
+.md-typeset .sql-card:hover {
+  border-color: var(--sql-amber);
+  box-shadow: 0 0.55rem 1.4rem rgba(36, 80, 107, 0.18);
+  transform: translateY(-2px);
+}
+
+.md-typeset .sql-card-notes {
+  border-left-color: var(--sql-blue);
+}
+
+.md-typeset .sql-card-exercises {
+  border-left-color: var(--sql-amber-deep);
+}
+
+.md-typeset .sql-card-quiz {
+  border-left-color: var(--sql-blue-bright);
+}
+
+.md-typeset .sql-card-projects {
+  border-left-color: var(--sql-amber);
+}
+
+.md-typeset .sql-card-resources {
+  border-left-color: var(--sql-blue-dark);
+}
+
+.md-nav__item .md-nav__link--active {
+  font-weight: 700;
+}
+
+.md-footer {
+  margin-top: 2rem;
+}
+
+@media screen and (max-width: 44.9375em) {
+  .sql-hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .md-typeset .sql-card {
+    min-height: 4.25rem;
+  }
+}

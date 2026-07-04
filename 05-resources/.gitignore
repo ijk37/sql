@@ -1,0 +1,11 @@
+*.pdf
+*.pptx
+*.docx
+*.xlsx
+*.png
+*.jpg
+*.md
+!README.md
+**/desktop.ini
+__pycache__/
+.Rhistory

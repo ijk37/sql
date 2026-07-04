@@ -1,0 +1,189 @@
+site_name: SQL & Databases
+site_description: Database Concepts and SQL course notes, quizzes, exercises, and projects across PostgreSQL, MySQL, SQL Server, and more.
+site_author: Jahid
+site_url: https://ijk37.com/sql/
+
+repo_name: ijk37/sql
+repo_url: https://github.com/ijk37/sql
+edit_uri: edit/main/
+
+docs_dir: .
+site_dir: ../sql-site
+use_directory_urls: false
+exclude_docs: |
+  mkdocs.yml
+  requirements.txt
+  .gitignore
+  .claude/**
+  .git/**
+  05-resources/**
+  !05-resources/README.md
+  tools/**
+  assets/site_design.md
+  01-notes.md
+  02-exercises.md
+  03-quiz.md
+  04-projects.md
+
+theme:
+  name: material
+  custom_dir: overrides
+  logo: assets/images/db-logo.svg
+  favicon: assets/images/favicon.svg
+  language: en
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  font:
+    text: Inter
+    code: JetBrains Mono
+  features:
+    - announce.dismiss
+    - content.action.edit
+    - content.code.copy
+    - content.code.select
+    - content.tabs.link
+    - navigation.footer
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.path
+    - navigation.top
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+
+plugins:
+  - same-dir
+  - search
+  - callouts
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.blocks.caption
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+extra_css:
+  - assets/stylesheets/extra.css
+
+extra_javascript:
+  - assets/javascripts/extra.js
+
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/ijk37/sql
+      name: GitHub repository
+
+not_in_nav: |
+  README.md
+  take_quiz_here.md
+
+nav:
+  - Home: index.md
+  - Notes:
+      - Overview: 01-notes/README.md
+      - "Module 01: Getting Started":
+          - "Why Databases?": 01-notes/01-01-why-databases.md
+          - "Relational Tables & Database Systems": 01-notes/01-02-relational-tables-and-db-systems.md
+          - "The DBMS Landscape": 01-notes/01-03-dbms-landscape.md
+          - "Web Apps, Warehouses, Big Data & Cloud": 01-notes/01-04-web-warehouses-big-data-cloud.md
+      - "Module 02: The Relational Model":
+          - "Relations & Terminology": 01-notes/02-01-relations-and-terminology.md
+          - "Characteristics of Relations": 01-notes/02-02-characteristics-of-relations.md
+          - "Keys": 01-notes/02-03-keys.md
+          - "Functional Dependencies": 01-notes/02-04-functional-dependencies.md
+      - "Module 03: SQL Fundamentals":
+          - "DDL: Tables & Data Types": 01-notes/03-01-ddl-tables-and-datatypes.md
+          - "DML: Insert, Update, Delete": 01-notes/03-02-dml-insert-update-delete.md
+          - "SELECT: Filtering & Sorting": 01-notes/03-03-select-filtering-sorting.md
+          - "Joins": 01-notes/03-04-joins.md
+          - "Subqueries & Aggregation": 01-notes/03-05-subqueries-and-aggregation.md
+      - "Module 04: Data Modeling & E-R Diagrams":
+          - "Systems Analysis & DB Lifecycle": 01-notes/04-01-systems-analysis-and-db-lifecycle.md
+          - "E-R Diagram Notation": 01-notes/04-02-er-diagram-notation.md
+          - "Relationship Types": 01-notes/04-03-relationship-types.md
+          - "Relationship Degree": 01-notes/04-04-relationship-degree.md
+          - "Context-Dependent Design": 01-notes/04-05-context-dependent-design.md
+      - "Module 05: Database Design & Normalization":
+          - "Transforming E-R Models into Tables": 01-notes/05-01-transforming-er-to-tables.md
+          - "Representing Relationships in SQL": 01-notes/05-02-representing-relationships-in-sql.md
+          - "Normalization": 01-notes/05-03-normalization.md
+          - "Joins over Recursive Relationships": 01-notes/05-04-joins-over-recursive-relationships.md
+      - "Module 06: Database Administration":
+          - "DBA Roles & Responsibilities": 01-notes/06-01-dba-roles.md
+          - "Concurrency & Locking": 01-notes/06-02-concurrency-and-locking.md
+          - "Transactions & ACID": 01-notes/06-03-transactions-and-acid.md
+          - "Security, Backup & Recovery": 01-notes/06-04-security-backup-recovery.md
+      - "Module 07: Data Warehousing, BI & Big Data":
+          - "Data Warehouses & Marts": 01-notes/07-01-data-warehouses-and-marts.md
+          - "OLAP vs OLTP & BI": 01-notes/07-02-olap-vs-oltp-and-bi.md
+          - "Cloud & Virtualization": 01-notes/07-03-cloud-and-virtualization.md
+          - "Big Data & NoSQL": 01-notes/07-04-big-data-and-nosql.md
+      - "Module 08: Advanced SQL":
+          - "ALTER, MERGE & Views": 01-notes/08-01-alter-merge-and-views.md
+          - "Outer Joins & Correlated Subqueries": 01-notes/08-02-outer-joins-and-correlated-subqueries.md
+          - "Recursive Queries & Set Operators": 01-notes/08-03-recursive-queries-and-set-operators.md
+          - "Window Functions & User-Defined Functions": 01-notes/08-04-window-functions-and-udfs.md
+  - Exercises:
+      - Overview: 02-exercises/README.md
+      - "Exercise 01": 02-exercises/01-exercise.md
+      - "Exercise 02": 02-exercises/02-exercise.md
+      - "Exercise 03": 02-exercises/03-exercise.md
+      - "Exercise 04": 02-exercises/04-exercise.md
+      - "Exercise 05": 02-exercises/05-exercise.md
+      - "Exercise 06": 02-exercises/06-exercise.md
+      - "Exercise 07": 02-exercises/07-exercise.md
+      - "Exercise 08": 02-exercises/08-exercise.md
+  - Quiz: 03-quiz/index.html
+  - Projects:
+      - Overview: 04-projects/README.md
+      - "Conceptual ER Modeling": 04-projects/01-conceptual-er-modeling/README.md
+      - "Relational Schema & Keys": 04-projects/02-relational-schema-and-keys/README.md
+      - "SQL Querying & Joins": 04-projects/03-sql-querying-and-joins/README.md
+      - "Full ER Diagram Design": 04-projects/04-full-er-diagram-design/README.md
+      - "Normalization & Schema Refinement": 04-projects/05-normalization-and-refinement/README.md
+      - "Transactions & Concurrency Lab": 04-projects/06-transactions-and-concurrency-lab/README.md
+      - "Mini Data Warehouse & BI": 04-projects/07-mini-data-warehouse-and-bi/README.md
+      - "Advanced SQL Capstone": 04-projects/08-advanced-sql-capstone/README.md
+  - "Resources": 05-resources/README.md

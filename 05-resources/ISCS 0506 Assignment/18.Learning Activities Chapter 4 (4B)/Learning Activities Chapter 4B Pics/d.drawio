@@ -1,0 +1,53 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" version="29.0.2">
+  <diagram name="Page-1" id="rVHQXKBwFDC43PMO2qkF">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="FrK0_lxBQBSgsiyayyjq-1" value="PATIENT" style="whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="160" y="120" width="120" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="FrK0_lxBQBSgsiyayyjq-2" value="&lt;font face=&quot;Times New Roman&quot;&gt;&lt;u&gt;PhysicianID&lt;/u&gt;&lt;br&gt;Speciality&lt;/font&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="640" y="240" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="FrK0_lxBQBSgsiyayyjq-4" value="&lt;span style=&quot;font-family: &amp;quot;Times New Roman&amp;quot;; caret-color: rgba(0, 0, 0, 0);&quot;&gt;PHYSICIAN&lt;/span&gt;" style="whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="640" y="120" width="120" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="FrK0_lxBQBSgsiyayyjq-5" value="&lt;font face=&quot;Times New Roman&quot;&gt;&lt;u&gt;PatientID&lt;/u&gt;&lt;br&gt;&lt;/font&gt;&lt;div&gt;&lt;font face=&quot;Times New Roman&quot;&gt;PatientName&lt;/font&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="160" y="245" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="FrK0_lxBQBSgsiyayyjq-12" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Fig: ER Diagram of the Hospital&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="137.5" y="100" width="645" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="Ab5Y8ONhq99uOXfyWnQb-2" value="&lt;div&gt;&lt;span style=&quot;font-family: &amp;quot;Times New Roman&amp;quot;; caret-color: rgba(0, 0, 0, 0);&quot;&gt;TREATMENT_DETAIL&lt;/span&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="395" y="215" width="130" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="zke_rCbDD4rPY9Vgw7mX-5" value="" style="fontSize=12;html=1;endArrow=ERoneToMany;startArrow=ERzeroToMany;rounded=0;exitX=1;exitY=0.675;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="FrK0_lxBQBSgsiyayyjq-1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="320" y="200" as="sourcePoint" />
+            <mxPoint x="640" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zke_rCbDD4rPY9Vgw7mX-10" value="treatment by" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="zke_rCbDD4rPY9Vgw7mX-5">
+          <mxGeometry x="0.0003" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zke_rCbDD4rPY9Vgw7mX-12" value="" style="fontSize=12;html=1;endArrow=ERoneToMany;startArrow=ERmandOne;rounded=0;entryX=0.997;entryY=0.312;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=0.333;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="FrK0_lxBQBSgsiyayyjq-4" target="FrK0_lxBQBSgsiyayyjq-1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="620" y="160" as="sourcePoint" />
+            <mxPoint x="290" y="159" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zke_rCbDD4rPY9Vgw7mX-14" value="admitted by" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="zke_rCbDD4rPY9Vgw7mX-12">
+          <mxGeometry x="-0.0077" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zke_rCbDD4rPY9Vgw7mX-15" value="&lt;span style=&quot;caret-color: rgba(0, 0, 0, 0); font-family: &amp;quot;Times New Roman&amp;quot;;&quot;&gt;Date&lt;/span&gt;&lt;div style=&quot;caret-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;span style=&quot;caret-color: rgba(0, 0, 0, 0); font-family: &amp;quot;Times New Roman&amp;quot;;&quot;&gt;Time&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;caret-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;span style=&quot;caret-color: rgba(0, 0, 0, 0); font-family: &amp;quot;Times New Roman&amp;quot;;&quot;&gt;Result&lt;/span&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="400" y="270" width="60" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

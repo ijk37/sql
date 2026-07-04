@@ -1,0 +1,39 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" version="29.0.2">
+  <diagram name="Page-1" id="rVHQXKBwFDC43PMO2qkF">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="FrK0_lxBQBSgsiyayyjq-1" value="&lt;font face=&quot;Times New Roman&quot;&gt;EMPLOYEE&lt;/font&gt;" style="whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="180" y="120" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="FrK0_lxBQBSgsiyayyjq-2" value="&lt;font face=&quot;Times New Roman&quot;&gt;&lt;u&gt;EmployeeID&lt;/u&gt;&lt;br&gt;Name&lt;/font&gt;&lt;div&gt;&lt;font face=&quot;Times New Roman&quot;&gt;Address&amp;nbsp;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font face=&quot;Times New Roman&quot;&gt;Birthdate&lt;/font&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="180" y="160" width="100" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="FrK0_lxBQBSgsiyayyjq-4" value="&lt;font face=&quot;Times New Roman&quot;&gt;PROJECT&lt;/font&gt;" style="whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="560" y="120" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="FrK0_lxBQBSgsiyayyjq-5" value="&lt;font face=&quot;Times New Roman&quot;&gt;&lt;u&gt;ProjectID&lt;/u&gt;&lt;br&gt;ProjectName&lt;/font&gt;&lt;div&gt;&lt;font face=&quot;Times New Roman&quot;&gt;StartDate&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="560" y="160" width="100" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="FrK0_lxBQBSgsiyayyjq-12" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Fig: ER Diagram of the Company&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="160" y="80" width="520" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="WeHueP46faHbsYfmZH_A-2" value="" style="fontSize=12;html=1;endArrow=ERoneToMany;startArrow=ERoneToMany;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="FrK0_lxBQBSgsiyayyjq-4">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="280" y="139.5" as="sourcePoint" />
+            <mxPoint x="440" y="139.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WeHueP46faHbsYfmZH_A-3" value="is assigned to" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="WeHueP46faHbsYfmZH_A-2">
+          <mxGeometry x="0.0286" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WeHueP46faHbsYfmZH_A-4" value="&lt;span style=&quot;font-family: &amp;quot;Times New Roman&amp;quot;; caret-color: rgba(0, 0, 0, 0);&quot;&gt;BillingRate&lt;/span&gt;" style="whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="375" y="150" width="100" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
