@@ -1,4 +1,4 @@
-// ── Module 06 — Database Administration (35) ────────────────────────────────
+// ── Module 06 — Database Administration (50) ─────────────────────────────────
 QUESTIONS["06"] = [
   {
     q: "What is the difference between data administration and database administration?",
@@ -384,5 +384,170 @@ QUESTIONS["06"] = [
     ],
     answer: 1,
     explain: "The DBA's focus is operational and system-specific: keeping a particular running database healthy (performance, security, backups). The data architect instead focuses on the long-term, organization-wide canonical data model.",
+  },
+  {
+    q: "Which of these tasks falls under 'data administration' rather than 'database administration'?",
+    options: [
+      "Tuning a slow query on the production PostgreSQL server",
+      "Setting organization-wide policy on who may access customer PII across every system, independent of any one database",
+      "Running EXPLAIN ANALYZE on a report",
+      "Restoring last night's backup after a failed migration",
+    ],
+    answer: 1,
+    explain: "Data administration is the organization-wide policy layer (privacy rules, data quality standards) that applies across all systems, distinct from database administration's technical, system-specific work like tuning or restoring one particular database.",
+  },
+  {
+    q: "A DBA is described as being judged less by 'features shipped' and more by what?",
+    options: [
+      "The number of new tables created per quarter",
+      "Things that don't happen — no data loss, no multi-hour outage, no silent corruption, no breach",
+      "How many GRANT statements were issued",
+      "The size of the database in gigabytes",
+    ],
+    answer: 1,
+    explain: "The notes frame DBA success as largely invisible: the job is done well when nothing goes wrong — no outages, no corruption, no breaches — rather than by visible new features.",
+  },
+  {
+    q: "Which of the following is explicitly listed as something cloud-managed databases (RDS, Cloud SQL, Azure SQL) do NOT eliminate the need for?",
+    options: [
+      "Applying OS security patches",
+      "Designing the schema well, choosing the right indexes, reviewing slow queries, and deciding who gets access to what",
+      "Taking automated backups",
+      "Handling server failover",
+    ],
+    answer: 1,
+    explain: "Cloud-managed databases automate patching, backups, and failover, but someone still has to do the schema design, indexing, query review, and access-control decisions — the notes are explicit that the DBA role isn't eliminated by managed services.",
+  },
+  {
+    q: "Two transactions each read berths_available = 1 for the same boat before either commits, and the second UPDATE silently overwrites the first. Besides 'lost update,' what related failure mode involves reading another transaction's uncommitted, in-progress change?",
+    options: [
+      "A phantom read",
+      "A dirty (inconsistent) read",
+      "A checkpoint failure",
+      "A two-phase commit",
+    ],
+    answer: 1,
+    explain: "A dirty read is a related but distinct problem: reading data another transaction has changed but not yet committed. If that writer later rolls back, the reader acted on data that never actually existed in the committed database.",
+  },
+  {
+    q: "Which locking granularity offers the highest concurrency but the most overhead from tracking many small locks?",
+    options: [
+      "Table-level locking",
+      "Page-level locking",
+      "Row-level locking",
+      "Database-level locking",
+    ],
+    answer: 2,
+    explain: "Row-level locking locks only the specific rows being changed, maximizing concurrency for unrelated rows, at the cost of more bookkeeping overhead compared to coarser table- or page-level locks.",
+  },
+  {
+    q: "What is the simplest application-level defense against deadlocks suggested in the concurrency notes?",
+    options: [
+      "Never use transactions at all",
+      "Always acquire locks on multiple rows in the same order across every transaction, e.g., always lock the lowest primary key first",
+      "Always use SERIALIZABLE isolation for every transaction",
+      "Disable the DBMS's automatic deadlock detector",
+    ],
+    answer: 1,
+    explain: "If every transaction agrees on a consistent lock acquisition order (such as always locking the lowest primary key value first), circular waits — the root cause of deadlocks — become impossible.",
+  },
+  {
+    q: "A transaction runs BEGIN; SELECT ... FOR UPDATE; UPDATE ...; COMMIT;. A second transaction tries to SELECT ... FOR UPDATE the exact same row before the first commits. What happens?",
+    options: [
+      "The second transaction reads the pre-update value immediately and proceeds",
+      "The second transaction waits until the first transaction commits or rolls back before it can acquire the lock",
+      "PostgreSQL raises a syntax error",
+      "Both transactions proceed simultaneously with no blocking",
+    ],
+    answer: 1,
+    explain: "SELECT ... FOR UPDATE takes an exclusive row lock immediately. A second transaction requesting the same lock must wait until the first transaction finishes (commit or rollback), which is exactly how pessimistic concurrency control prevents acting on stale data.",
+  },
+  {
+    q: "Under optimistic concurrency control using a row_version column, what does an UPDATE ... WHERE row_version = 7 affecting zero rows tell the application?",
+    options: [
+      "The row was permanently deleted and can never be recovered",
+      "Someone else already updated the row since it was read, so the application should reload and retry with fresh data",
+      "The database connection has failed",
+      "The WHERE clause contains a syntax error",
+    ],
+    answer: 1,
+    explain: "Zero affected rows means the row_version no longer matches what was read — another transaction won the race and updated it first. The application detects this conflict and retries with a fresh read rather than silently losing the update.",
+  },
+  {
+    q: "Which situation is the best candidate for optimistic rather than pessimistic concurrency control?",
+    options: [
+      "A high-contention hot row updated by dozens of transactions per second",
+      "A form where most users read a record, think for a while, and rarely collide with another editor of the same record",
+      "A financial transfer that must never lose an update under any circumstance",
+      "A single-user embedded database with no concurrent access at all",
+    ],
+    answer: 1,
+    explain: "Optimistic concurrency control is best when conflicts are rare — like a record most users read and occasionally edit without colliding — since it avoids the cost of locking on every read and only pays a retry cost on the occasional actual conflict.",
+  },
+  {
+    q: "In two-phase locking (2PL), once a transaction releases its first lock, what is it no longer allowed to do?",
+    options: [
+      "Release any further locks",
+      "Acquire any new locks — it has entered the shrinking phase",
+      "Commit the transaction",
+      "Read any data at all",
+    ],
+    answer: 1,
+    explain: "2PL splits lock activity into a growing phase (only acquiring locks) followed by a shrinking phase (only releasing locks). Once the first release happens, the transaction has entered the shrinking phase and may not acquire any new locks.",
+  },
+  {
+    q: "A transaction reads a customer's store_credit, then INSERTs a new charter row referencing that customer within the same BEGIN/COMMIT block. If the INSERT fails a CHECK constraint, what should happen to the earlier store_credit UPDATE?",
+    options: [
+      "It should remain applied since it already succeeded",
+      "It should be rolled back along with the failed INSERT, since the whole transaction is one atomic unit",
+      "It should be applied to a different customer instead",
+      "PostgreSQL automatically converts it into a separate committed transaction",
+    ],
+    answer: 1,
+    explain: "Atomicity requires that all of a transaction's steps succeed together or none do. If the INSERT fails, ROLLBACK must undo the earlier UPDATE too, or the customer's credit would vanish with nothing to show for it.",
+  },
+  {
+    q: "Which ACID property is specifically responsible for rejecting a transaction step that would violate a CHECK constraint like store_credit >= 0?",
+    options: [
+      "Atomicity",
+      "Consistency",
+      "Isolation",
+      "Durability",
+    ],
+    answer: 1,
+    explain: "Consistency guarantees a transaction only takes the database from one valid state to another, respecting every constraint. A step that would push store_credit negative violates that constraint and is rejected to preserve consistency.",
+  },
+  {
+    q: "A report transaction reads a balance, performs some calculations, and reads the same balance again a moment later expecting it to be unchanged, protecting against another transaction committing a change in between. Which isolation level is the minimum needed to guarantee that?",
+    options: [
+      "READ UNCOMMITTED",
+      "READ COMMITTED",
+      "REPEATABLE READ",
+      "None; no isolation level can guarantee this",
+    ],
+    answer: 2,
+    explain: "REPEATABLE READ guarantees that if a transaction reads the same row twice, it sees the same value both times, preventing the non-repeatable read this report scenario depends on. READ COMMITTED alone would not prevent it.",
+  },
+  {
+    q: "Why does the module recommend reserving SERIALIZABLE isolation for a small number of transactions, such as financial transfers, rather than using it everywhere by default?",
+    options: [
+      "SERIALIZABLE is deprecated and will be removed from the SQL standard",
+      "SERIALIZABLE guarantees the most safety but trades throughput for it, and may cause PostgreSQL to abort and require a retry when it detects a conflict",
+      "SERIALIZABLE cannot be combined with COMMIT or ROLLBACK",
+      "SERIALIZABLE is only available in MySQL, not PostgreSQL",
+    ],
+    answer: 1,
+    explain: "Higher isolation isn't free — SERIALIZABLE blocks more and may cause PostgreSQL to abort a transaction on conflict detection, asking the application to retry. It's reserved for cases where correctness can't tolerate any anomaly, not used blanket-wide for performance reasons.",
+  },
+  {
+    q: "A DBA wants to grant a reporting tool read-only access to every table in a schema without listing each table individually. Which statement accomplishes this in PostgreSQL?",
+    options: [
+      "GRANT SELECT ON ALL TABLES IN SCHEMA public TO reporting_readonly;",
+      "GRANT ALL PRIVILEGES ON DATABASE mydb TO reporting_readonly;",
+      "CREATE USER reporting_readonly WITH SUPERUSER;",
+      "REVOKE ALL ON SCHEMA public FROM reporting_readonly;",
+    ],
+    answer: 0,
+    explain: "GRANT SELECT ON ALL TABLES IN SCHEMA public grants read-only access across every current table in that schema to the role in one statement, matching the least-privilege goal of a reporting-only account.",
   },
 ];

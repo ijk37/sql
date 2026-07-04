@@ -1,4 +1,4 @@
-// ── Module 07 — Data Warehousing, BI & Big Data (32) ────────────────────────
+// ── Module 07 — Data Warehousing, BI & Big Data (50) ────────────────────────
 QUESTIONS["07"] = [
   {
     q: "What is the primary purpose of a data warehouse?",
@@ -311,5 +311,178 @@ QUESTIONS["07"] = [
     ],
     answer: 1,
     explain: "Unlike Postgres's dedicated JSONB type, SQL Server stores JSON as text (NVARCHAR) and exposes dedicated functions to query into it.",
+  },
+  {
+    q: "When an organization combines a central data warehouse with several department-specific data marts feeding off it, this overall architecture is often called...",
+    options: ["A star schema", "An enterprise data warehouse (EDW)", "A data lake", "An OLTP cluster"],
+    answer: 1,
+    explain: "An enterprise data warehouse (EDW) describes the architecture where a central warehouse and multiple department-scoped marts work together.",
+  },
+  {
+    q: "A manager wants a three-year sales trend report and asks to run it directly against the live order-entry OLTP database. What is the most accurate reason this is a bad idea?",
+    options: [
+      "OLTP databases cannot run SELECT statements",
+      "The heavy historical scan can degrade the very transactions the OLTP system exists to process quickly, and its normalized shape requires many joins for analysis",
+      "OLTP databases do not support the SQL language",
+      "SQL Server, MySQL, and PostgreSQL cannot store more than one year of data",
+    ],
+    answer: 1,
+    explain: "Running large analytical scans against a live OLTP system risks locking/slowing operational transactions, and normalized OLTP tables are the wrong shape for fast aggregation.",
+  },
+  {
+    q: "Real operational data destined for a warehouse is often 'dirty' in ways that must be fixed before analysis. Which of the following is an example of the kind of cleanup the Transform step performs?",
+    options: [
+      "Converting a raw email address like joe@acme.com into just the domain acme.com for a 'customers by company' report",
+      "Physically shredding the original source database",
+      "Removing the ability to query the warehouse with SQL",
+      "Deleting the fact table after each load",
+    ],
+    answer: 0,
+    explain: "Transform standardizes and reshapes messy source values — such as simplifying an email into a domain, or a country code into a full name — before loading into the warehouse.",
+  },
+  {
+    q: "Which of these is a practical reason ELT has become popular with modern cloud warehouses like Snowflake, BigQuery, or Redshift?",
+    options: [
+      "Cloud warehouses cannot run a Transform step at all",
+      "Cloud compute is now cheap and scalable enough to transform raw data efficiently after it's already loaded",
+      "ELT eliminates the need for an Extract step",
+      "ELT is required by the SQL standard for any warehouse over 1TB",
+    ],
+    answer: 1,
+    explain: "ELT loads raw data first and transforms it afterward, taking advantage of cheap, scalable compute in modern cloud warehouses rather than transforming before load.",
+  },
+  {
+    q: "In a star schema for a video rental business, which of the following would most likely be a column on the fact table rather than a dimension table?",
+    options: ["genre", "membership_tier", "rental_fee", "movie_title"],
+    answer: 2,
+    explain: "rental_fee is a numeric measure describing the rental event itself, so it belongs on the fact table alongside foreign keys — genre, membership_tier, and movie_title all describe a dimension (movie or customer).",
+  },
+  {
+    q: "Why are dimension tables in a star schema often deliberately denormalized, unlike OLTP tables?",
+    options: [
+      "Denormalization is required by the SQL standard for any table with a surrogate key",
+      "The goal is fast, simple joins for analysis, not preventing the update anomalies that matter in a frequently-updated operational system",
+      "Denormalized tables use less disk space than normalized ones in every case",
+      "Dimension tables are never queried, so their structure doesn't matter",
+    ],
+    answer: 1,
+    explain: "Warehouses prioritize simple, fast joins over the update-anomaly protection normalization provides, since dimension data changes far less often than it's read for analysis.",
+  },
+  {
+    q: "Classify this scenario: 'An analyst runs a report aggregating five years of quarterly revenue by region.' Is this OLTP or OLAP, and why?",
+    options: [
+      "OLTP, because it touches the employee table",
+      "OLAP, because it's a large-scale, read-mostly aggregation over historical data rather than a fast update to current state",
+      "OLTP, because all SQL queries are considered transactions",
+      "Neither — this requires a NoSQL database",
+    ],
+    answer: 1,
+    explain: "Large historical aggregation performed by an analyst is the defining OLAP workload, in contrast to the many small fast writes typical of OLTP.",
+  },
+  {
+    q: "Which statement about OLTP and OLAP workloads is FALSE?",
+    options: [
+      "OLTP systems are heavily indexed for point lookups like WHERE employee_number = 105",
+      "OLAP workloads are typically read-mostly or read-only",
+      "OLTP and OLAP are almost always run as two separate database instances in practice",
+      "OLAP queries are optimized for many small, concurrent single-row writes",
+    ],
+    answer: 3,
+    explain: "OLAP queries are optimized for large-scale reads and aggregation, not small concurrent writes — that describes OLTP instead.",
+  },
+  {
+    q: "An Excel PivotTable summarizing sales by region and product is a familiar, everyday example of which BI concept?",
+    options: ["A NoSQL document store", "An OLAP-style reporting tool built on tabular data", "A recursive CTE", "A Type 1 hypervisor"],
+    answer: 1,
+    explain: "PivotTables let a user pick dimensions as inputs and see calculated measures as outputs, which is exactly the OLAP reporting pattern, just via a spreadsheet UI instead of a full BI platform.",
+  },
+  {
+    q: "Consider `SELECT product_name, quarter, SUM(revenue) FROM sales GROUP BY ROLLUP(product_name, quarter)`. Which row would show NULL in BOTH the product_name and quarter columns?",
+    options: [
+      "A detail row for a specific product and quarter",
+      "A subtotal row for one product across all quarters",
+      "The single grand-total row summing all revenue",
+      "ROLLUP never produces a row with two NULLs",
+    ],
+    answer: 2,
+    explain: "ROLLUP's final row is the grand total, which shows NULL for every grouped column since it aggregates across all products and all quarters.",
+  },
+  {
+    q: "You need subtotals sliced every possible way — by product alone, by quarter alone, by product-and-quarter, and a grand total — with no assumed hierarchy between product and quarter. Which extension should you reach for?",
+    options: ["GROUP BY ROLLUP", "GROUP BY CUBE", "PARTITION BY", "WITH RECURSIVE"],
+    answer: 1,
+    explain: "CUBE computes subtotals for every combination of the grouped columns, which is exactly suited to cases with no natural hierarchy between the grouping columns.",
+  },
+  {
+    q: "A Type 2 ('hosted') hypervisor, such as VirtualBox or VMware Workstation, differs from a Type 1 ('bare metal') hypervisor in that it...",
+    options: [
+      "Cannot create more than one virtual machine",
+      "Runs as an application on top of a regular host operating system, rather than directly on hardware",
+      "Is exclusively used inside large data centers",
+      "Requires a container runtime like Docker to function",
+    ],
+    answer: 1,
+    explain: "Type 2 hypervisors run as an application within a host OS (common for a student's laptop), while Type 1 hypervisors run directly on the hardware with no host OS underneath.",
+  },
+  {
+    q: "Running `docker run postgres` starts a container rather than a full virtual machine. What does this imply about how it behaves?",
+    options: [
+      "It boots its own separate kernel, taking several minutes to start like a VM",
+      "It shares the host machine's kernel and starts almost instantly, packaging just Postgres and its dependencies",
+      "It requires a Type 1 hypervisor to run at all",
+      "It cannot be used for local development, only production",
+    ],
+    answer: 1,
+    explain: "Containers share the host kernel and package only the app plus dependencies, which is why they start in milliseconds and behave identically across machines, unlike a full VM.",
+  },
+  {
+    q: "A company wants maximum flexibility to install any database engine or extension it likes, and is willing to handle its own patching and backups. Which cloud service model best fits?",
+    options: ["IaaS", "PaaS", "SaaS", "None of these — this requires on-premises hardware only"],
+    answer: 0,
+    explain: "IaaS (e.g., a raw EC2/Azure VM instance) hands over the OS and everything above it to the customer, maximizing flexibility at the cost of more operational burden.",
+  },
+  {
+    q: "What does a hybrid cloud deployment let an organization do that a purely public cloud deployment cannot?",
+    options: [
+      "Run NoSQL databases exclusively",
+      "Keep sensitive data on-premises or in a private cloud while bursting other workloads to the public cloud, connected together",
+      "Avoid ever patching software",
+      "Use MapReduce without HDFS",
+    ],
+    answer: 1,
+    explain: "Hybrid cloud combines on-premises/private infrastructure with public cloud resources — useful when compliance requires sensitive data to stay on-prem while other workloads scale out to the public cloud.",
+  },
+  {
+    q: "A video archive holding many terabytes of old training footage, where new videos are added only a few times a year, best illustrates which point about the Three V's of Big Data?",
+    options: [
+      "All three V's always move together for every dataset",
+      "A dataset can be high in one V (Volume) while being low in another (Velocity)",
+      "Variety is irrelevant to video data",
+      "Volume only matters for structured relational data",
+    ],
+    answer: 1,
+    explain: "The Three V's are independent dimensions — a video archive is high-volume but low-velocity, showing that a dataset doesn't need to be 'big' in every dimension at once.",
+  },
+  {
+    q: "In the CAP theorem, if a network partition splits a distributed database's cluster into disconnected groups, what practical choice does the system actually face?",
+    options: [
+      "Whether to guarantee consistency or availability, since partition tolerance is treated as essentially mandatory",
+      "Whether to guarantee partition tolerance or ignore the SQL standard entirely",
+      "There is no real tradeoff; all three properties are always fully guaranteed",
+      "Whether to switch from a key-value store to a graph database",
+    ],
+    answer: 0,
+    explain: "Since network partitions inevitably occur in real distributed systems, partition tolerance is treated as non-negotiable, leaving consistency-vs-availability as the actual tradeoff during a partition.",
+  },
+  {
+    q: "A product catalog needs core columns (product_id, product_name, price) plus wildly different extra attributes depending on category (shirts need size/color, laptops need ram/screen_size). Which approach best balances flexibility with keeping relational features like constraints and indexing on the core fields?",
+    options: [
+      "Add a separate nullable column for every possible attribute across every category",
+      "Store the core fields as normal typed columns and put the variable attributes in a JSONB column",
+      "Move the entire catalog to a graph database",
+      "Store every field, including product_id and price, as unstructured text",
+    ],
+    answer: 1,
+    explain: "Keeping core, always-present fields as normal typed columns while placing wildly varying attributes in a JSONB column is the pragmatic middle ground between full relational rigidity and a separate NoSQL store.",
   },
 ];

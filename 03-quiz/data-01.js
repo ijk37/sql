@@ -1,4 +1,4 @@
-// ── Module 01 — Getting Started (32) ─────────────────────────────────────
+// ── Module 01 — Getting Started (50) ─────────────────────────────────────
 QUESTIONS["01"] = [
   {
     q: "What is the primary purpose of a database?",
@@ -307,5 +307,157 @@ QUESTIONS["01"] = [
     ],
     answer: 1,
     explain: "Managed services (e.g., AWS RDS, Azure SQL Database) handle operational tasks like backups and patching while you connect and write SQL exactly as you would against a self-hosted instance.",
+  },
+  {
+    q: "In this course's terminology, what is 'data'?",
+    options: [
+      "Any file stored on a hard drive",
+      "A recorded fact — a name, a number, a date",
+      "A synonym for 'database'",
+      "Only information that has been indexed by a DBMS",
+    ],
+    answer: 1,
+    explain: "Data is simply a recorded fact. A database is the structure built to store data reliably, retrieve it, and keep it consistent.",
+  },
+  {
+    q: "Fast Cash Loans starts with a single spreadsheet of customers. At what point does the text say a flat list 'stops being enough'?",
+    options: [
+      "As soon as the spreadsheet has more than 100 rows",
+      "Once more than one kind of thing is being tracked and those things relate to each other",
+      "Only once the company hires a database administrator",
+      "Never — a flat list always suffices if it has enough columns",
+    ],
+    answer: 1,
+    explain: "The trouble starts when you're tracking more than one kind of thing (e.g., customers and their payments) that relate to each other — a single flat list can't represent that cleanly.",
+  },
+  {
+    q: "Fast Cash Loans adds a `Payment_Amount` column directly to the customer sheet, with one row per payment. A customer with 3 payments now appears as 3 rows repeating their name and phone. What redundancy problem does this directly enable?",
+    options: [
+      "A deletion anomaly only",
+      "An update anomaly, since the same customer facts are duplicated across every payment row",
+      "A referential integrity violation",
+      "No problem — this is a normal design",
+    ],
+    answer: 1,
+    explain: "Repeating the customer's name and phone on every payment row means an update to that customer's info must be applied to every row, or the data disagrees with itself — an update anomaly.",
+  },
+  {
+    q: "What is the relational-model term for the real-world thing (a customer, an employee, a project) that a table is meant to represent?",
+    options: ["A domain", "An entity", "A tuple", "A schema"],
+    answer: 1,
+    explain: "An entity is the real-world thing of interest a relation represents; ideally, a database captures each entity in exactly one table.",
+  },
+  {
+    q: "According to this course's naming convention (matching Kroenke's textbook), how should the EMPLOYEE table's name be styled in formal relation notation?",
+    options: [
+      "Employees, plural and capitalized",
+      "EMPLOYEE, ALL_CAPS and singular",
+      "employee_table, snake_case with a suffix",
+      "Employee, PascalCase and singular",
+    ],
+    answer: 1,
+    explain: "Formal relation names are written ALL_CAPS and singular, e.g. EMPLOYEE — while actual PostgreSQL DDL commonly uses lowercase snake_case instead.",
+  },
+  {
+    q: "In the WP EMPLOYEE table example, which of these is a column name written in the course's PascalCase convention?",
+    options: ["email_address", "EMPLOYEE", "EmailAddress", "emailaddress"],
+    answer: 2,
+    explain: "Column names are written in PascalCase in the course's formal notation, e.g. EmailAddress, FirstName, LastName.",
+  },
+  {
+    q: "A database application sits between users and the DBMS. Which of the following is that application responsible for?",
+    options: [
+      "Physically writing bytes to disk",
+      "Forms, reports, and query screens that let users read and enter data",
+      "Enforcing referential integrity at the storage engine level",
+      "Replacing the need for a DBMS entirely",
+    ],
+    answer: 1,
+    explain: "The database application is the user-facing layer (forms, reports, query screens); it never touches storage directly — it always goes through the DBMS.",
+  },
+  {
+    q: "Which SQL query below is a database application asking the DBMS for data, per the Module 01 example?",
+    options: [
+      "CREATE TABLE employee (id INT);",
+      "SELECT first_name, last_name, email_address FROM employee WHERE department = 'Marketing' ORDER BY last_name;",
+      "DROP DATABASE company;",
+      "GRANT ALL ON employee TO public;",
+    ],
+    answer: 1,
+    explain: "This SELECT is exactly the kind of query a database application sends through the DBMS to retrieve data for a user-facing report or screen.",
+  },
+  {
+    q: "What happens if you try to INSERT an EMPLOYEE row with Department = 'Skunkworks' when no such department exists in DEPARTMENT, and a foreign key constraint is defined?",
+    options: [
+      "The row inserts successfully with a warning",
+      "PostgreSQL silently creates a new 'Skunkworks' department row",
+      "The insert fails with a foreign key constraint violation error",
+      "The DEPARTMENT table is dropped automatically",
+    ],
+    answer: 2,
+    explain: "With a REFERENCES constraint in place, the DBMS rejects the insert because 'Skunkworks' has no matching row in DEPARTMENT — referential integrity protects against orphaned foreign keys.",
+  },
+  {
+    q: "Which statement about Microsoft Access and enterprise-class DBMSs is most accurate?",
+    options: [
+      "Access is a typical example of an enterprise database system",
+      "Access is a typical example of a personal database system, used by one person at a time on a small dataset",
+      "Access and PostgreSQL are functionally identical in scale and concurrency",
+      "Access requires a dedicated server process, just like SQL Server",
+    ],
+    answer: 1,
+    explain: "Microsoft Access (like SQLite) is a typical personal database tool — a handful of tables, single-user use, no need to run 24/7.",
+  },
+  {
+    q: "Which of these engines is described as extremely mature, feature-rich, and expensive, and dominant in large legacy enterprise systems like banking and ERP?",
+    options: ["SQLite", "MariaDB", "Oracle Database", "PostgreSQL"],
+    answer: 2,
+    explain: "Oracle Database is the commercial, mature engine associated with large-scale legacy enterprise systems such as banking and ERP.",
+  },
+  {
+    q: "A startup needs to prototype quickly and wants an embedded database with no separate server process to manage. Which engine best fits, per the course's decision guide?",
+    options: ["SQL Server", "Oracle", "SQLite", "MariaDB at enterprise scale"],
+    answer: 2,
+    explain: "The course's decision guide recommends SQLite for prototyping or embedded/local storage, since it needs no separate server process.",
+  },
+  {
+    q: "A company is already deeply invested in .NET, Power BI, and Active Directory. Which DBMS does the course's decision guide suggest as the natural fit?",
+    options: ["SQLite", "SQL Server", "MariaDB", "Oracle"],
+    answer: 1,
+    explain: "SQL Server integrates deeply with the Microsoft stack (.NET, Power BI, Active Directory), making it the natural fit for a Microsoft-centric shop.",
+  },
+  {
+    q: "A retail chain wants to analyze total sales by region across the last 8 quarters without slowing down its live checkout system. What kind of system is best suited to run that analysis?",
+    options: [
+      "The same OLTP system that processes checkouts, run at peak hours",
+      "A separate OLAP-oriented data warehouse built for large, read-only aggregations",
+      "A spreadsheet emailed weekly to managers",
+      "A NoSQL key-value store with no query language",
+    ],
+    answer: 1,
+    explain: "Heavy analytical queries are usually offloaded to a separate data warehouse built for OLAP, so they don't compete with or slow down the OLTP system handling live transactions.",
+  },
+  {
+    q: "Which pairing correctly matches a Big Data / NoSQL category with an example engine mentioned in the course?",
+    options: [
+      "Document store — Neo4j",
+      "Graph database — MongoDB",
+      "Wide-column store — Cassandra",
+      "Key-value store — ArangoDB",
+    ],
+    answer: 2,
+    explain: "Cassandra is the wide-column store example; MongoDB is the document store, Redis the key-value store, and Neo4j/ArangoDB the graph database examples in the course's NoSQL teaser.",
+  },
+  {
+    q: "Which of the following is Google Cloud Platform's managed relational database offering, analogous to AWS RDS?",
+    options: ["Aurora", "Cloud SQL", "Azure SQL Database", "DynamoDB"],
+    answer: 1,
+    explain: "GCP offers Cloud SQL (and AlloyDB) as managed relational database services, comparable to AWS RDS/Aurora and Azure SQL Database.",
+  },
+  {
+    q: "In the Web database application flow (Browser → Web/API server → SQL → DBMS → Database), what format is typically used to send the response back up to the browser?",
+    options: ["Raw SQL text", "JSON", "A compiled binary", "Plain CSV only"],
+    answer: 1,
+    explain: "Server-side code translates the browser's request into SQL, runs it against the DBMS, and the results typically flow back to the browser as JSON over the API.",
   },
 ];
